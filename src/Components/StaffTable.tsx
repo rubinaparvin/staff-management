@@ -1,10 +1,12 @@
 import React from "react";
-import { Button, Space, Table, Tag } from "antd";
+import { Button, Space, Table } from "antd";
 import type { TableProps } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 interface props {
   data: any;
+  handleDelete: (record: any) => void;
+  handleEdit: (record: any) => void;
 }
 
 interface DataType {
@@ -15,48 +17,48 @@ interface DataType {
   tags: string[];
 }
 
-const columns: TableProps<DataType>["columns"] = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
+const StaffTable: React.FC<props> = ({ data, handleDelete, handleEdit }) => {
+  const columns: TableProps<DataType>["columns"] = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text) => <a>{text}</a>,
+    },
 
-  {
-    title: "Email  Address",
-    dataIndex: "email",
-    key: "email",
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
-  },
-  {
-    title: "Role",
-    dataIndex: "role",
-    key: "role",
-  },
+    {
+      title: "Email  Address",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
+    },
 
-  {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <Button>
-          <EditOutlined />
-        </Button>
-        <Button>
-          <DeleteOutlined />
-        </Button>
-      </Space>
-    ),
-  },
-];
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <Button onClick={() => handleEdit(record)}>
+            <EditOutlined />
+          </Button>
+          <Button type="primary" danger onClick={() => handleDelete(record)}>
+            <DeleteOutlined />
+          </Button>
+        </Space>
+      ),
+    },
+  ];
 
-const StaffTable: React.FC<props> = ({ data }) => (
-  <Table<DataType> columns={columns} dataSource={data} />
-);
+  return <Table<DataType> columns={columns} dataSource={data} />;
+};
 
 export default StaffTable;

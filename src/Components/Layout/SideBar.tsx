@@ -1,3 +1,4 @@
+import { ProductOutlined, TeamOutlined } from "@ant-design/icons";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 
@@ -7,8 +8,6 @@ const SideBar = () => {
       <Menu
         menuItemStyles={{
           button: {
-            // the active class will be added automatically by react router
-            // so we can use it to style the active menu item
             [`&.active`]: {
               backgroundColor: "#13395e",
               color: "#b6c8d9",
@@ -16,8 +15,14 @@ const SideBar = () => {
           },
         }}
       >
-        <MenuItem component={<Link to="/app/staff" />}> Staff</MenuItem>
-        <MenuItem component={<Link to="/app/dashboard" />}> Dashboard</MenuItem>
+        <MenuItem component={<Link to="/app/dashboard" />}>
+          {" "}
+          <ProductOutlined />
+          Dashboard
+        </MenuItem>
+        <MenuItem component={<Link to="/app/staff" />}>
+          <TeamOutlined /> Staff
+        </MenuItem>
       </Menu>
     </Sidebar>
   );

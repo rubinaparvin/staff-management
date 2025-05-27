@@ -7,12 +7,24 @@ const Staff = () => {
   const [open, setOpen] = useState(false);
   const [staffs, setStaffs] = useState([
     {
+      id: 1,
       name: "Trivenugopal Kadali",
       email: "Trivenugopal@gmail.com",
       role: "manager",
       status: "active",
     },
   ]);
+  const [SelectedItem, setSelectedItem] = useState(null);
+
+  const handleEdit = (_record: any) => {
+    setOpen(true);
+    setSelectedItem(_record);
+  };
+
+  const handleDelete = (record: any) => {
+    console.log(record);
+    setStaffs(staffs.filter((e) => e.id !== record.id));
+  };
   return (
     <div className=" bg-slate-200 px-10 h-[100vh] ">
       <h1 className="text-3xl p-10 font-bold ">Manage Staff</h1>
@@ -32,12 +44,17 @@ const Staff = () => {
           </Button>
         </div>
         <Divider />
-        <StaffTable data={staffs} />
+        <StaffTable
+          data={staffs}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        />
         <StaffForm
           open={open}
           setOpen={setOpen}
           setStaffs={setStaffs}
           staffs={staffs}
+          selectedItem={SelectedItem}
         />
       </div>
     </div>

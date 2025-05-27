@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+.ant-layout-header {
+  color: #fff;
+  background-color: #fff;
+}
